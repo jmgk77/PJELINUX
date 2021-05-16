@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=PJeOffice
+GenericName=PJeOffice
+Comment=PJeOffice
+Exec=/usr/share/pje-office/pjeOffice.sh 
+Icon=/usr/share/pje-office/shortcuts/icons/PJeOffice.png
+Terminal=false
+Type=Application
+Categories=Office;
