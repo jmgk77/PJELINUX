@@ -1,10 +1,9 @@
 #!/bin/sh
 
-#para Ubuntu 20.04...
-
 #helpers...
 link_if_not_exists() {
     if [ ! -e $2 ]; then
+    	echo $1 "->" $2
         sudo ln -s $1 $2
     fi
 }
@@ -21,25 +20,30 @@ fi
 #instala drivers do smartcard 
 sudo apt update && sudo apt upgrade
 sudo apt install libengine-pkcs11-openssl libpcsc-perl libccid libpcsclite1 pcscd pcsc-tools libasedrive-usb opensc openssl libengine-pkcs11-openssl
-#nao existe no ubuntu 16.04...
-#sudo apt install libp11-3 
 
 #extrai bibliotecas para a pasta do sistema
 sudo tar -xf data.tgz -C /usr/lib --exclude='pjeOffice.desktop'
 
 #cria links
-link_if_not_exists /usr/lib/libaetdlss.so.3.0.2508 /usr/lib/libaetdlss.so.3.0
-link_if_not_exists /usr/lib/libaetjcss.so.3.0.2509 /usr/lib/libaetjcss.so.3.0
-link_if_not_exists /usr/lib/libaetpkss.so.3.0.2528 /usr/lib/libaetpkss.so.3.0
-link_if_not_exists /usr/lib/libaetdlss.so.3.0.2508 /usr/lib/libaetdlss.so.3
-link_if_not_exists /usr/lib/libaetjcss.so.3.0.2509 /usr/lib/libaetjcss.so.3
-link_if_not_exists /usr/lib/libaetpkss.so.3.0.2528 /usr/lib/libaetpkss.so.3
-link_if_not_exists /usr/lib/libaetpkss.so.3.0.2528 /usr/lib/libaetpkss.so
-link_if_not_exists /usr/lib/libaetjcss.so.3.0.2509 /usr/lib/libaetjcss.so
-link_if_not_exists /usr/lib/libaetdlss.so.3.0.2508 /usr/lib/libaetdlss.so
+DLG="libaetdlglib.so.3.5.4428"
+DLS="libaetdlss.so.3.5.4441"
+JCS="libaetjcss.so.3.5.4427"
+PKS="libaetpkss.so.3.5.4458"
 
-#conserta permisssões
-sudo chown $USER:$USER /usr/lib/libaetdlss.so.3.0.2508 /usr/lib/libaetjcss.so.3.0.2509 /usr/lib/libaetpkss.so.3.0.2528
+cd /usr/lib/
+link_if_not_exists $DLG libaetdlglib.so.3.5
+link_if_not_exists libaetdlglib.so.3.5 libaetdlglib.so.3
+link_if_not_exists libaetdlglib.so.3 libaetdlglib.so
+link_if_not_exists $DLS libaetdlss.so.3.5
+link_if_not_exists libaetdlss.so.3.5 libaetdlss.so.3
+link_if_not_exists libaetdlss.so.3 libaetdlss.so
+link_if_not_exists $JCS libaetjcss.so.3.5
+link_if_not_exists libaetjcss.so.3.5 libaetjcss.so.3
+link_if_not_exists libaetjcss.so.3 libaetjcss.so
+link_if_not_exists $PKS libaetpkss.so.3.5
+link_if_not_exists libaetpkss.so.3.5 libaetpkss.so.3
+link_if_not_exists libaetpkss.so.3 libaetpkss.so
+cd -
 
 #baixa libs que não estão disponiveis via apt-get
 
