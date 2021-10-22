@@ -64,4 +64,4 @@ sudo dpkg -i *.deb
 rm *.deb
 
 #extrai atalho para lançador (o que vem no PjeOffice tem erros)
-tar -xf data.tgz -C ~/.local/share/applications --exclude='*.so*'
+tar -xf data.tgz -C $HOME/.local/share/applications --exclude='*.so*'
